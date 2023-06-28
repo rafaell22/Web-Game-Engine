@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rafaell22/Console@1.2.0/console.css">
+        <style>
+            * {
+                box-sizing: border-box;
+                font-family: Arial, Sans-Serif;
+            }
+            
+            body {
+                height: 100vh;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .hidden {
+                display: hidden;
+            }
+            
+            .tab-container {
+                height: 100vh;
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+            }
+            
+            .tab-content {
+                height: 100%;
+                width: 100%;
+                padding-bottom: 56px;
+            }
+            
+            .tab-button-container {
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+                height: 56px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #888;
+                color: white;
+            }
+            
+            .tab-button {
+                height: 56px;
+                width: 80px;
+                margin-right: 15px;
+                line-height: 56px;
+                text-align: center;
+            }
+            
+            .tab-button.selected {
+                font-weight: 800;
+                background-color: #666;
+            }
+            
+            iframe {
+                height: 100%;
+                width: 100%;
+            }
+            
+            ol {
+                width: 100%;
+                height: 100%;
+            }
+            
+            li {
+                margin-left: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tab-container">
+            <div id="tab-content-html" class="tab-content hidden">
+                <ol contenteditable>
+                    <li></li>
+                </ol>
+            </div>
+            <div id="tab-content-css" class="tab-content hidden">
+                <ol contenteditable>
+                    <li></li>
+                </ol>
+            </div>
+            <div id="tab-content-js" class="tab-content hidden">
+                <ol contenteditable>
+                    <li></li>
+                </ol>
+            </div>
+            <div id="tab-content-game" class="tab-content">
+                <iframe 
+                    srcdoc=""
+                ></iframe>
+            </div>
+        </div>
+        <div class="tab-button-container">
+            <div id="tab-button-html" class="tab-button" onclick="changeTabs('html')">
+                HTML
+            </div>
+            <div id="tab-button-css" class="tab-button" onclick="changeTabs('css')">
+                CSS
+            </div>
+            <div id="tab-button-js" class="tab-button" onclick="changeTabs('js')">
+                JS
+            </div>
+            <div id="tab-button-game" class="tab-button selected" onclick="changeTabs('game')">
+                GAME
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/gh/rafaell22/Console@1.2.0/console.js"></script>
+        <script>
+            const elTabContainer = document.querySelector('.tab-container');
+            elTabContainer.style.height = window.innerHeight;
+            function changeTabs(newTab) {
+                console.log('click')
+                const tabs = document.querySelector('.tab-container').children;
+                for(const tab of tabs) { tab.classList.add('hidden'); };
+                const tabButtons = document.querySelector('.tab-button-container').children;
+                for(const tabButton of tabButtons) { tabButton.classList.remove('selected'); };
+                document.getElementById(`tab-content-${newTab}`).classList.remove('hidden');
+                document.getElementById(`tab-button-${newTab}`).classList.add('selected');
+            }
+        </script>
+    </body>
+</html>
